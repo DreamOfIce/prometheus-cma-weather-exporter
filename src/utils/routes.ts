@@ -21,7 +21,7 @@ export const routes = async (server: FastifyInstance) => {
       ...weathers
     } = await getWeather(cityId);
 
-    const registry = new MetricRegistry("weather");
+    const registry = new MetricRegistry("cmaweather");
     registry.setLabel("country", country);
     registry.setLabel("province", province);
     registry.setLabel("city", city);

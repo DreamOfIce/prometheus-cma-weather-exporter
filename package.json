@@ -1,7 +1,14 @@
 {
-  "name": "prometheus-weather-exporter",
+  "name": "prometheus-cma-weather-exporter",
   "version": "1.0.0",
-  "description": "Prometheus exporter for weather info",
+  "description": "Prometheus exporter for real-time weather from CMA",
+  "keywords": [],
+  "license": "MIT",
+  "author": "冰雪殇璃陌梦 <admin@dreamofice.cn> (https://www.dreamofice.cn)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DreamOfIce/prometheus-cma-weather-exporter.git"
+  },
   "main": "dist/index.js",
   "private": true,
   "scripts": {
@@ -12,9 +19,6 @@
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "冰雪殇璃陌梦 <admin@dreamofice.cn> (https://www.dreamofice.cn)",
-  "license": "MIT",
   "type": "module",
   "dependencies": {
     "axios": "^1.6.8",

@@ -13,7 +13,7 @@ export namespace Metric {
     }
 
     public deleteLabel(key: string) {
-      Reflect.deleteProperty(this.labels, key);
+      delete this.labels[key];
       return this;
     }
 
@@ -141,7 +141,7 @@ export class MetricRegistry {
 
   public deleteMetrics(id: string, index?: number) {
     if (index) delete this.registry[id]?.metrics[index];
-    else Reflect.deleteProperty(this.registry, id);
+    else delete this.registry[id];
     return this;
   }
 
@@ -155,7 +155,7 @@ export class MetricRegistry {
   }
 
   public deleteLabel(name: string) {
-    Reflect.deleteProperty(this.defaultLabels, name);
+    delete this.defaultLabels[name];
     return this;
   }
 

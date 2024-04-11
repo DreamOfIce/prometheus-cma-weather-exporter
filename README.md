@@ -1,6 +1,6 @@
-# prometheus-weather-exporter
+# prometheus-cma-weather-exporter
 
-Prometheus exporter for weather info
+Prometheus exporter for real-time weather from [CMA](https://weather.cma.cn/)
 
 ## Quick start
 

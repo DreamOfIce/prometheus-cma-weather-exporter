@@ -1,8 +1,8 @@
 export const showHelp = () =>
-  console.log(`prometheus-weather-exporter
+  console.log(`Prometheus exporter for CMA weather
 
 Usage:
-  $ prometheus-weather-exporter [--args]
+  $ prometheus-cma-weather-exporter [--args]
 
 Options:
   -H, --host <host>  Host to listen on (default: 0.0.0.0)
