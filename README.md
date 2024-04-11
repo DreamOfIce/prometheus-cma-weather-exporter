@@ -32,8 +32,8 @@ Visit https://weather.cma.cn/web/weather/map.html and choose a city, the last nu
 ### Command line options
 
 ```
-  -H, --host <host>  Host to listen on (default: 0.0.0.0)
-  -p, --port <port>  Port to listen on (default: 9101)
+  -H, --host <host>  Host to listen on (default: 127.0.0.1)
+   --port <port>  Port to listen on (default: 9101)
   -h, --help         Display helps and exit
 ```
 
