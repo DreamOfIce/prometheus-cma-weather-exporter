@@ -5,6 +5,6 @@ Usage:
   $ prometheus-weather-exporter [--args]
 
 Options:
-  -h, --host <host>  Host to listen on (default: 0.0.0.0)
+  -H, --host <host>  Host to listen on (default: 0.0.0.0)
   -p, --port <port>  Port to listen on (default: 9101)
-  -h, --help         Display this message`);
+  -h, --help         Display this message and exit`);

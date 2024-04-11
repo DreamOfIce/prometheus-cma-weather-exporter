@@ -13,7 +13,7 @@ const { help, host, port } = minimist(process.argv.slice(2), {
   },
   default: {
     help: false,
-    host: "0.0.0.0",
+    host: "127.0.0.1",
     port: 9101,
   },
 }) as ParsedArgs & { help: boolean; host: string; port: number };

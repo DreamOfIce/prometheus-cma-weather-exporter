@@ -4,9 +4,11 @@ import { Metric, MetricRegistry } from "./metric";
 
 //eslint-disable-next-line @typescript-eslint/require-await
 export const routes = async (server: FastifyInstance) => {
-  server.get("/", (_request, reply) => reply.redirect(301, "/metrics"));
+  server.get("/", (_request, reply) =>
+    reply.redirect(301, `/metrics?city=54511`),
+  ); // Beijing
   server.get<{ Querystring: { city: string } }>("/metrics", async (request) => {
-    const cityCode = +request.query.city;
+    const cityId = +request.query.city;
     const {
       country,
       province,
@@ -17,7 +19,7 @@ export const routes = async (server: FastifyInstance) => {
       //eslint-disable-next-line @typescript-eslint/no-unused-vars
       windScale,
       ...weathers
-    } = await getWeather(cityCode);
+    } = await getWeather(cityId);
 
     const registry = new MetricRegistry("weather");
     registry.setLabel("country", country);

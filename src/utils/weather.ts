@@ -54,12 +54,12 @@ export const weatherHelps: Record<string, string> = {
   windSpeed: "Current wind speed in metres per second",
 };
 
-export const getWeather = async (cityCode: number) => {
+export const getWeather = async (cityId: number) => {
   let response: AxiosResponse<APIResponse>;
   try {
-    response = await axios.get<APIResponse>(`${APIEndpoint}${cityCode}`, {
+    response = await axios.get<APIResponse>(`${APIEndpoint}${cityId}`, {
       headers: {
-        referer: `${refererPrefix}${cityCode}`,
+        referer: `${refererPrefix}${cityId}`,
         "User-Agent": UserAgent,
       },
     });
@@ -73,9 +73,7 @@ export const getWeather = async (cityCode: number) => {
 
   const { data } = response;
   if (typeof data.data === "string")
-    throw new Error(
-      `Failed to get weather info: invaild city code ${cityCode}`,
-    );
+    throw new Error(`Failed to get weather info: invaild city id ${cityId}`);
   const [country, province, city] = <[string, string, string]>(
     data.data.location.path.split(", ")
   );
