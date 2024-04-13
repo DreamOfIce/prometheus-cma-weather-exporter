@@ -1,41 +1,41 @@
-import Fastify from "fastify";
-import minimist, { type ParsedArgs } from "minimist";
-import { routes, showHelp } from "./utils";
+#!/usr/bin/env node
 
-/*
- * CLI
- */
-const { help, host, port } = minimist(process.argv.slice(2), {
-  alias: {
-    h: "help",
-    H: "host",
-    p: "port",
-  },
-  default: {
-    help: false,
-    host: "127.0.0.1",
-    port: 9101,
-  },
-}) as ParsedArgs & { help: boolean; host: string; port: number };
+import cac from "cac";
+import { version } from "../package.json";
+import { startServer } from "./server";
 
-if (help) {
-  showHelp();
-  process.exit(0);
-}
+const cli = cac("prometheus-cma-weather-exporter");
 
-/*
- * Server
- */
+cli
+  .version(version)
+  .option("-H, --host <host>", "host to listen on", { default: "127.0.0.1" })
+  .option("-p, --port <port>", "port to listen on", { default: 9101 });
 
-const server = Fastify({
-  logger: true,
-});
+// default command
+cli
+  .command("")
+  .option("-l, --log-level", "set the log level", { default: "info" })
+  .action((options: { host: string; port: number; logLevel: string }) => {
+    console.log(options);
+    startServer(options.host, options.port, { level: options.logLevel });
+  });
 
-await server.register(routes);
+cli
+  .command("start", "Start the exporter")
+  .option("-l --log-level", "set the log level", { default: "info" })
+  .action((options: { host: string; port: number; logLevel: string }) =>
+    startServer(options.host, options.port, { level: options.logLevel })
+  );
 
-try {
-  await server.listen({ host, port });
-} catch (err) {
-  server.log.error(err);
-  process.exit(1);
-}
+cli
+  .command("dev", "Start the exporter in development mode")
+  .action((options: { host: string; port: number }) =>
+    startServer(options.host, options.port, {
+      level: "debug",
+      transport: {
+        target: "pino-pretty",
+      },
+    })
+  );
+
+cli.help().parse();
