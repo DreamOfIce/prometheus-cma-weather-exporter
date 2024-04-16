@@ -1,11 +1,8 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import { axios } from "./utils";
+import { RefererPrefix, WeatherAPIEndpoint } from "./consts";
 
-const APIEndpoint = "https://weather.cma.cn/api/now/";
-const refererPrefix = "https://weather.cma.cn/web/weather/";
-const UserAgent =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36";
-
-export interface APIResponse {
+interface WeatherAPIResponse {
   code: number;
   msg: string;
   data:
@@ -55,14 +52,16 @@ export const weatherHelps: Record<string, string> = {
 };
 
 export const getWeather = async (cityId: number) => {
-  let response: AxiosResponse<APIResponse>;
+  let response: AxiosResponse<WeatherAPIResponse>;
   try {
-    response = await axios.get<APIResponse>(`${APIEndpoint}${cityId}`, {
-      headers: {
-        referer: `${refererPrefix}${cityId}`,
-        "User-Agent": UserAgent,
+    response = await axios.get<WeatherAPIResponse>(
+      `${WeatherAPIEndpoint}${cityId}`,
+      {
+        headers: {
+          referer: `${RefererPrefix}/${cityId}`,
+        },
       },
-    });
+    );
     if (response.data.code !== 0)
       throw new Error(`${response.data.msg}(${response.data.code})`);
   } catch (err) {

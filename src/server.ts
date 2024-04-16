@@ -1,15 +1,16 @@
 import Fastify, { FastifyServerOptions } from "fastify";
-import { routes } from "./utils";
+import { initMapping, routes } from "./utils";
 
 export const startServer = async (
   host: string,
   port: number,
-  logger: FastifyServerOptions["logger"] = true
+  logger: FastifyServerOptions["logger"] = true,
 ) => {
   const server = Fastify({
     logger,
   });
 
+  await server.register(initMapping);
   await server.register(routes);
 
   try {

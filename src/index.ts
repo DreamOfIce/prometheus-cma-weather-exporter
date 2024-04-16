@@ -15,16 +15,15 @@ cli
 cli
   .command("")
   .option("-l, --log-level", "set the log level", { default: "info" })
-  .action((options: { host: string; port: number; logLevel: string }) => {
-    console.log(options);
-    startServer(options.host, options.port, { level: options.logLevel });
-  });
+  .action((options: { host: string; port: number; logLevel: string }) =>
+    startServer(options.host, options.port, { level: options.logLevel }),
+  );
 
 cli
   .command("start", "Start the exporter")
   .option("-l --log-level", "set the log level", { default: "info" })
   .action((options: { host: string; port: number; logLevel: string }) =>
-    startServer(options.host, options.port, { level: options.logLevel })
+    startServer(options.host, options.port, { level: options.logLevel }),
   );
 
 cli
@@ -35,7 +34,7 @@ cli
       transport: {
         target: "pino-pretty",
       },
-    })
+    }),
   );
 
 cli.help().parse();

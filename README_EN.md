@@ -23,19 +23,19 @@ Prometheus exporter for real-time weather from [CMA](https://weather.cma.cn/)
 
 ## Usage
 
-### Get city id
+### Query parameters
 
 > Note: Some cities may not support real-time weather
 
-Visit https://weather.cma.cn/web/weather/map.html and choose a city, the last number is the city id
+|    name    |  type  |                                        description                                         |
+| :--------: | :----: | :----------------------------------------------------------------------------------------: |
+|    `id`    | number | city id, the last number of [CMA Web Weather](https://weather.cma.cn/web/weather/map.html) |
+| `province` | string |                                  province name in Chinese                                  |
+|   `city`   | string |                                    city name in Chinese                                    |
 
 ### Command line options
 
-```
-  -H, --host <host>  Host to listen on (default: 127.0.0.1)
-  -p --port <port>  Port to listen on (default: 9101)
-  -h, --help         Display helps and exit
-```
+Run program with `--help` to see all options
 
 ## License
 
